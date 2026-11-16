@@ -1,0 +1,699 @@
+
+/* ==========================================
+   1. 기본 설정
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, "Noto Sans KR", sans-serif;
+    background-color: #FFF8F2;
+    color: #FF8C42;
+    min-width: 320px;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   2. 상단 헤더
+========================================== */
+
+.header {
+    width: 100%;
+    min-height: 90px;
+    padding: 18px 30px;
+    background-color: #fff;;
+    border-bottom: 1px solid #e5e5e5;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.header-title h1 {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.header-title p {
+    font-size: 13px;
+    color: #888;
+}
+
+
+/* ==========================================
+   3. 배경색 선택 영역
+========================================== */
+
+.background-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.background-label {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.background-options {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.background-option {
+    position: relative;
+    width: 29px;
+    height: 29px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+    flex-shrink: 0;
+}
+
+.background-option:hover {
+    transform: scale(1.12);
+}
+
+.background-option.active {
+    outline: 2px solid #555;
+    outline-offset: 3px;
+}
+
+/* 투명 배경 아이콘 */
+
+.background-option[data-background="transparent"] {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.transparent-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background-color: #fff;
+    background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+
+    background-size: 10px 10px;
+    background-position:
+        0 0,
+        0 5px,
+        5px -5px,
+        -5px 0;
+}
+
+
+/* ==========================================
+   4. 메인 레이아웃
+========================================== */
+
+.main-container {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 22px;
+
+    padding: 22px 30px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.upload-section,
+.preview-section {
+    background-color: #fff;
+    color: #666666;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    min-width: 0;
+}
+
+.upload-section h2,
+.preview-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================
+   5. 업로드 영역
+========================================== */
+
+.upload-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+
+    text-align: center;
+    background-color: #FF8C42;
+    color: #FFF8F2;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+    background-color: #ffbc81;
+}
+
+
+/* 드래그 앤 드롭 영역 */
+
+.drop-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 150px;
+    margin-top: 15px;
+    padding: 20px;
+
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+
+    background-color: #fafafa;
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.drop-zone p {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.drop-zone span {
+    font-size: 11px;
+    color: #999;
+}
+
+.drop-icon {
+    font-size: 27px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.drop-zone.drag-over {
+    border-color: #FF8C42;
+    background-color: #FFF8F2;
+}
+
+
+/* 업로드 개수 */
+
+.upload-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 22px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#imageCount {
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* 초기화 버튼 */
+
+.upload-controls {
+    margin-top: 20px;
+}
+
+#resetButton {
+    width: 100%;
+    padding: 11px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+
+    background-color: #fff;
+    color: #666;
+
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+#resetButton:hover {
+    background-color: #FFF8F2;
+    border-color: #FF8C42;
+}
+
+
+/* ==========================================
+   6. 미리보기 영역
+========================================== */
+
+.preview-section {
+    overflow: hidden;
+}
+
+.preview-container {
+    margin-bottom: 30px;
+    min-width: 0;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.preview-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.preview-header span {
+    font-size: 11px;
+    color: #888;
+}
+
+
+/* ==========================================
+   7. 6 × 7 연결 테스트 프레임
+========================================== */
+
+.grid-preview-wrapper {
+    width: fit-content;
+    max-width: 100%;
+
+    overflow: auto;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.grid-preview {
+    display: grid;
+
+    grid-template-columns: repeat(6, 90px);
+    grid-template-rows: repeat(7, 90px);
+
+    width: 540px;
+    height: 630px;
+}
+
+/* 개별 프레임 */
+
+.grid-cell {
+    position: relative;
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background-color: #fff;
+
+    background-image:
+        linear-gradient(45deg, #e5e5e5 25%, transparent 25%),
+        linear-gradient(-45deg, #e5e5e5 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e5e5e5 75%),
+        linear-gradient(-45deg, transparent 75%, #e5e5e5 75%);
+
+    background-size: 12px 12px;
+
+    background-position:
+        0 0,
+        0 6px,
+        6px -6px,
+        -6px 0;
+
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 개별 이모티콘 */
+
+.grid-cell img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+/* 드래그 가능한 이미지 */
+
+.grid-cell.has-image {
+    cursor: grab;
+}
+
+.grid-cell.has-image:active {
+    cursor: grabbing;
+}
+
+/* 드래그 중인 칸 */
+
+.grid-cell.drag-over {
+    outline: 2px solid #FF8C42;
+    outline-offset: -2px;
+    background-color: #FFF8F2;
+}
+
+
+/* ==========================================
+   8. 채팅창 미리보기
+========================================== */
+
+.chat-container {
+    margin-top: 35px;
+}
+
+/* 채팅창 전체 */
+
+.chat-window {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 0;
+    height: auto;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #b6c6d8;
+
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   9. 채팅창 상단
+========================================== */
+
+.chat-header {
+    height: 48px;
+    min-height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 15px;
+
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.chat-back,
+.chat-menu {
+    font-size: 22px;
+    color: #333;
+}
+
+.chat-title {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   10. 채팅 내용
+========================================== */
+
+.chat-content {
+    flex: none;
+
+    width: 100%;
+    height: 110px;
+    min-height: 110px;
+
+    padding: 8px;
+
+    display: grid;
+
+    grid-template-columns: repeat(6, 19px);
+    grid-template-rows: repeat(7, 19px);
+
+    gap: 0;
+
+    align-content: start;
+    justify-content: start;
+
+    overflow: auto;
+}
+
+/* 채팅창 안의 개별 이모티콘 */
+
+.chat-cell {
+    position: relative;
+
+    width: 19px;
+    height: 19px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.chat-cell img {
+    display: block;
+
+    width: 19px;
+    height: 19px;
+
+    object-fit: contain;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   11. 채팅창 하단 입력창
+========================================== */
+
+.chat-input-area {
+    height: 52px;
+    min-height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 12px;
+
+    background-color: #fff;
+}
+
+.chat-plus,
+.chat-emoji {
+    font-size: 20px;
+    color: #777;
+}
+
+.chat-input {
+    flex: 1;
+
+    padding: 9px 13px;
+
+    border: 1px solid #eee;
+    border-radius: 20px;
+
+    font-size: 11px;
+    color: #aaa;
+}
+
+
+/* ==========================================
+   12. 설명 문구
+========================================== */
+
+.preview-description {
+    margin-top: 10px;
+
+    color: #999;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   13. 스크롤바
+========================================== */
+
+.image-list::-webkit-scrollbar,
+.grid-preview-wrapper::-webkit-scrollbar,
+.chat-content::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.image-list::-webkit-scrollbar-thumb,
+.grid-preview-wrapper::-webkit-scrollbar-thumb,
+.chat-content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+
+/* ==========================================
+   14. 태블릿
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .header {
+        padding: 18px 20px;
+    }
+
+    .main-container {
+        grid-template-columns: 210px minmax(0, 1fr);
+        padding: 18px;
+        gap: 15px;
+    }
+
+    .upload-section,
+    .preview-section {
+        padding: 15px;
+    }
+
+    .grid-preview-wrapper {
+        max-width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   15. 모바일
+========================================== */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 18px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-title h1 {
+        font-size: 20px;
+    }
+
+    .header-title p {
+        font-size: 12px;
+    }
+
+    .background-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .background-options {
+        gap: 10px;
+    }
+
+    .background-option {
+        width: 27px;
+        height: 27px;
+    }
+
+    .main-container {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 15px;
+    }
+
+    .upload-section,
+    .preview-section {
+        padding: 16px;
+    }
+
+    .preview-section {
+        overflow: hidden;
+    }
+
+    .grid-preview-wrapper {
+        width: 100%;
+        overflow: auto;
+    }
+
+    .chat-window {
+        max-width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   16. 작은 모바일
+========================================== */
+
+@media (max-width: 380px) {
+
+    .header-title h1 {
+        font-size: 18px;
+    }
+
+    .background-selector {
+        gap: 8px;
+    }
+
+    .background-label {
+        font-size: 11px;
+    }
+
+    .background-options {
+        gap: 7px;
+    }
+
+    .background-option {
+        width: 24px;
+        height: 24px;
+    }
+
+}

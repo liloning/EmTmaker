@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니 이모티콘 연결 테스트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         상단 헤더
+    ============================== -->
+
+    <header class="header">
+
+        <div class="header-title">
+            <h1>미니 이모티콘 연결 테스트</h1>
+            <p>이모티콘을 배치하고 연속 사용 시 연결 상태를 확인하세요.</p>
+        </div>
+
+        <!-- 배경색 선택 -->
+        <div class="background-selector">
+
+            <span class="background-label">미리보기 배경</span>
+
+            <div class="background-options">
+
+                <button
+                    type="button"
+                    class="background-option active"
+                    data-background="transparent"
+                    title="투명 배경"
+                    aria-label="투명 배경"
+                >
+                    <span class="transparent-icon"></span>
+                </button>
+
+                <button
+                    type="button"
+                    class="background-option"
+                    data-background="#b6c6d8"
+                    title="파란색"
+                    aria-label="파란색 배경"
+                    style="background-color: #b6c6d8;"
+                ></button>
+
+                <button
+                    type="button"
+                    class="background-option"
+                    data-background="#fae74d"
+                    title="노란색"
+                    aria-label="노란색 배경"
+                    style="background-color: #fae74d;"
+                ></button>
+
+                <button
+                    type="button"
+                    class="background-option"
+                    data-background="#ffffff"
+                    title="흰색"
+                    aria-label="흰색 배경"
+                    style="background-color: #ffffff;"
+                ></button>
+
+                <button
+                    type="button"
+                    class="background-option"
+                    data-background="#000000"
+                    title="검은색"
+                    aria-label="검은색 배경"
+                    style="background-color: #000000;"
+                ></button>
+
+                <button
+                    type="button"
+                    class="background-option"
+                    data-background="#f9f9f9"
+                    title="연한 회색"
+                    aria-label="연한 회색 배경"
+                    style="background-color: #f9f9f9;"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         메인 영역
+    ============================== -->
+
+    <main class="main-container">
+
+        <!-- 이미지 업로드 영역 -->
+
+        <section class="upload-section">
+
+            <h2>이모티콘 업로드</h2>
+
+            <label for="imageUpload" class="upload-button">
+                + 이미지 파일 선택
+            </label>
+
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/png, image/webp"
+                multiple
+                hidden
+            >
+
+            <div id="dropZone" class="drop-zone">
+
+                <div class="drop-icon">＋</div>
+
+                <p>이미지를 이곳에 드래그하세요.</p>
+
+                <span>PNG / WEBP 파일 지원</span>
+
+            </div>
+
+            <div class="upload-info">
+                <span>업로드된 이미지</span>
+                <span id="imageCount">0 / 42</span>
+            </div>
+
+            <!-- 업로드 이미지 목록은 별도로 표시하지 않음 -->
+
+            <div class="upload-controls">
+
+                <button type="button" id="resetButton">
+                    전체 초기화
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             미리보기 영역
+        ============================== -->
+
+        <section class="preview-section">
+
+            <h2>미리보기</h2>
+
+
+            <!-- 1. 연결 테스트 프레임 -->
+
+            <div class="preview-container">
+
+                <div class="preview-header">
+
+                    <h3>연결 테스트 프레임</h3>
+
+                    <span>45 × 45 px</span>
+
+                </div>
+
+                <div class="grid-preview-wrapper">
+
+                    <div
+                        id="gridPreview"
+                        class="grid-preview"
+                    >
+
+                        <!-- JS에서 6열 × 7행 프레임 생성 -->
+
+                    </div>
+
+                </div>
+
+                <p class="preview-description">
+                    이미지를 드래그하여 원하는 위치에 배치하세요.
+                </p>
+
+            </div>
+
+
+            <!-- 2. 카카오톡 채팅창 미리보기 -->
+
+            <div class="preview-container chat-container">
+
+                <div class="preview-header">
+
+                    <h3>채팅창 미리보기</h3>
+
+                    <span>19 × 19 px</span>
+
+                </div>
+
+
+                <div class="chat-window">
+
+                    <!-- 채팅방 상단 -->
+
+                    <div class="chat-header">
+
+                        <span class="chat-back">‹</span>
+
+                        <span class="chat-title">
+                            미니 이모티콘 테스트
+                        </span>
+
+                        <span class="chat-menu">⋮</span>
+
+                    </div>
+
+
+                    <!-- 채팅 내용 -->
+
+                    <div
+                        id="chatPreview"
+                        class="chat-content"
+                    >
+
+                        <!-- JS에서 채팅창 미리보기 생성 -->
+
+                    </div>
+
+
+                    <!-- 채팅방 하단 입력창 -->
+
+                    <div class="chat-input-area">
+
+                        <span class="chat-plus">＋</span>
+
+                        <div class="chat-input">
+                            메시지를 입력하세요.
+                        </div>
+
+                        <span class="chat-emoji">☺</span>
+
+                    </div>
+
+                </div>
+
+                <p class="preview-description">
+                    실제 채팅창에서의 이모티콘 연결 모습을 확인하세요.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
